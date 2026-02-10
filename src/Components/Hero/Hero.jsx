@@ -53,41 +53,7 @@ const Counter = ({ end, duration = 2000 }) => {
   return <span>{count.toLocaleString()}+</span>;
 };
 
-const products = [
-  {
-    id: 1,
-    name: "T-shirt with Tape Details",
-    image: shirt1,
-    price: 120,
-    rating: 4.5,
-    korzinka: 1,
-  },
-  {
-    id: 2,
-    name: "Skinny Fit Jeans",
-    image: jeans,
-    price: 240,
-    oldPrice: 260,
-    discount: "-20%",
-    rating: 3.5,
-  },
-  {
-    id: 3,
-    name: "Checkered Shirt",
-    image: shirt2,
-    price: 180,
-    rating: 4.5,
-  },
-  {
-    id: 4,
-    name: "Sleeve Striped T-shirt",
-    image: tshirt,
-    price: 130,
-    oldPrice: 160,
-    discount: "-30%",
-    rating: 4.5,
-  },
-];
+
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -218,7 +184,6 @@ const Hero = () => {
       </div>
 
 
-      {/* CARD 2 */}
       <div data-aos="fade-right" className="group">
         <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
           <img src={jeans} alt="Jeans" className="h-full object-contain" />

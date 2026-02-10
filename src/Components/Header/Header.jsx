@@ -21,7 +21,7 @@ const Header = () => {
     <header  className="sticky top-0 z-50 bg-[#f5f5f5] border-b border-gray-200">
       <div  className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
 
-        {/* LOGO */}
+      
         <div data-aos="fade-right" className="flex items-center gap-4">
           <button onClick={() => setIsOpen(true)} className="md:hidden">
             <Menu size={26} />
@@ -35,7 +35,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* DESKTOP NAV */}
+       
         <nav data-aos="fade-left" className="hidden md:flex items-center gap-8 text-sm font-medium">
           <NavLink to="/" end className={linkClass}>Home</NavLink>
           <NavLink to="/category" className={linkClass}>Category</NavLink>
@@ -43,7 +43,7 @@ const Header = () => {
           <NavLink to="/cart" className={linkClass}>Cart</NavLink>
         </nav>
 
-        {/* SEARCH */}
+     
         <div data-aos="fade-right" className="hidden md:flex items-center bg-gray-200 rounded-full px-4 py-2 w-[350px]">
           <Search size={18} className="text-gray-500 mr-2" />
           <input
@@ -53,7 +53,7 @@ const Header = () => {
           />
         </div>
 
-        {/* ICONS */}
+      
         <div data-aos="fade-left" className="flex items-center gap-5">
           <ShoppingCart
             onClick={() => navigate("/cart")}
@@ -63,7 +63,7 @@ const Header = () => {
         </div>
       </div>
 
-      {/* OVERLAY */}
+     
       {isOpen && (
         <div
           onClick={() => setIsOpen(false)}
@@ -71,7 +71,7 @@ const Header = () => {
         />
       )}
 
-      {/* MOBILE MENU */}
+      
       <div
         className={`fixed top-0 left-0 h-full w-[280px] bg-white z-50
         transform transition-transform duration-300
