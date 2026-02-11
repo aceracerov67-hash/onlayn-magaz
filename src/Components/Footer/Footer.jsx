@@ -41,12 +41,12 @@ const Footer = () => {
           </p>
 
         
-          <div data-aos="fade-left" className="flex gap-4">
+          <div  className="flex gap-4">
   <a
     href="https://twitter.com"
     target="_blank"
     rel="noopener noreferrer"
-    className="p-2 bg-white rounded-full shadow-md cursor-pointer 
+    className="p-2 bg-white text-black rounded-full shadow-md cursor-pointer 
                hover:scale-110 hover:bg-black hover:text-white 
                transition-all duration-300"
   >
@@ -57,7 +57,7 @@ const Footer = () => {
     href="https://facebook.com"
     target="_blank"
     rel="noopener noreferrer"
-    className="p-2 bg-white rounded-full shadow-md cursor-pointer 
+    className="p-2 bg-white  text-black rounded-full shadow-md cursor-pointer 
                hover:scale-110 hover:bg-black hover:text-white 
                transition-all duration-300"
   >
@@ -68,8 +68,8 @@ const Footer = () => {
     href="https://www.instagram.com/fxatamova13/"
     target="_blank"
     rel="noopener noreferrer"
-    className="p-2 bg-white rounded-full shadow-md cursor-pointer 
-               hover:scale-110 hover:bg-black hover:text-white 
+    className="p-2 bg-white  text-black rounded-full shadow-md cursor-pointer 
+               hover:scale-110 hover:bg-black hover:text-white
                transition-all duration-300"
   >
     <Instagram size={16} />
@@ -79,7 +79,7 @@ const Footer = () => {
     href="https://github.com/aceracerov67-hash"
     target="_blank"
     rel="noopener noreferrer"
-    className="p-2 bg-white rounded-full shadow-md cursor-pointer 
+    className="p-2 bg-white  text-black rounded-full shadow-md cursor-pointer 
                hover:scale-110 hover:bg-black hover:text-white 
                transition-all duration-300"
   >
