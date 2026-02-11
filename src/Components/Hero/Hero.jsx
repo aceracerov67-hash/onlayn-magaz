@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
+import { useCart } from "../../context/CartContext";
+
+
+
 
 import img1 from "./img1.1.png";
 import img2 from "./img2.png";
@@ -31,6 +35,7 @@ import main4 from "./main4.png"
 
 
 const Counter = ({ end, duration = 2000 }) => {
+
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -56,6 +61,8 @@ const Counter = ({ end, duration = 2000 }) => {
 
 
 const Hero = () => {
+  const { addToCart, cartItems, increase, decrease } = useCart();
+
   const navigate = useNavigate();
 
  
@@ -154,242 +161,143 @@ const Hero = () => {
       
      <section className="bg-[#F2F0F1] py-20">
   <div className="max-w-7xl mx-auto px-6">
-    <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-extrabold text-center mb-14">
+    <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-14">
       NEW ARRIVALS
     </h2>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    {(() => {
+      const products = [
+        { id: 301, name: "T-shirt with Tape Details", price: 120, image: shirt1 },
+        { id: 302, name: "Skinny Fit Jeans", price: 240, image: jeans },
+        { id: 303, name: "Checkered Shirt", price: 180, image: shirt2 },
+        { id: 304, name: "Sleeve Striped T-shirt", price: 130, image: tshirt },
+      ];
 
-         <div data-aos="fade-left" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={shirt1} alt="T-shirt" className="h-full object-contain" />
+      return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {products.map((product) => {
+            const item = cartItems.find((c) => c.id === product.id);
+
+            return (
+              <div key={product.id} className="group bg-white rounded-2xl p-4 shadow">
+                
+                <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4">
+                  <img src={product.image} className="h-full object-contain" />
+                </div>
+
+                <h3 className="font-semibold mb-2">
+                  {product.name}
+                </h3>
+
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="font-bold text-lg">${product.price}</span>
+                </div>
+
+                {!item ? (
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="mt-3 text-xs bg-black text-white px-4 py-2 rounded-full"
+                  >
+                    Add to Cart
+                  </button>
+                ) : (
+                  <div className="mt-3 flex items-center bg-gray-100 rounded-full w-fit">
+                    <button onClick={() => decrease(product.id)} className="px-3">
+                      −
+                    </button>
+                    <span className="px-3">{item.qty}</span>
+                    <button onClick={() => increase(product.id)} className="px-3">
+                      +
+                    </button>
+                  </div>
+                )}
+
+              </div>
+            );
+          })}
         </div>
+      );
+    })()}
 
-        <h3 className="font-semibold mb-2">
-          T-shirt with Tape Details
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★★★</div>
-          <span className="text-gray-500">4.5/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$120</span>
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-
-      <div data-aos="fade-right" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={jeans} alt="Jeans" className="h-full object-contain" />
-        </div>
-
-        <h3 className="font-semibold mb-2">
-          Skinny Fit Jeans
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★★☆</div>
-          <span className="text-gray-500">3.5/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$240</span>
-          <span className="line-through text-gray-400">$260</span>
-          <span className="text-red-500 text-xs bg-red-100 px-2 py-1 rounded-full">
-            -20%
-          </span>
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-
-      <div data-aos="fade-left" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={shirt2} alt="Checkered Shirt" className="h-full object-contain" />
-        </div>
-
-        <h3 className="font-semibold mb-2">
-          Checkered Shirt
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★★★</div>
-          <span className="text-gray-500">4.5/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$180</span>
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-
-      <div data-aos="fade-right" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={tshirt} alt="Striped T-shirt" className="h-full object-contain" />
-        </div>
-
-        <h3 className="font-semibold mb-2">
-          Sleeve Striped T-shirt
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★★★</div>
-          <span className="text-gray-500">4.5/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$130</span>
-          <span className="line-through text-gray-400">$160</span>
-          <span className="text-red-500 text-xs bg-red-100 px-2 py-1 rounded-full">
-            -30%
-          </span>
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-    </div>
-
-    <div data-aos="fade-down" className="flex justify-center mt-12">
+    <div className="flex justify-center mt-12">
       <button className="border border-gray-300 px-8 py-3 rounded-full hover:bg-black hover:text-white transition">
         View All
       </button>
     </div>
+
   </div>
 </section>
+
 
        <section className="bg-[#F2F0F1] py-20">
   <div className="max-w-7xl mx-auto px-6">
-    <h2 data-aos="fade-up" className="text-3xl md:text-4xl font-extrabold text-center mb-14">
-        TOP SELLING
+    <h2 className="text-3xl md:text-4xl font-extrabold text-center mb-14">
+      TOP SELLING
     </h2>
 
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+    {(() => {
+      const products = [
+        { id: 401, name: "T-shirt with Tape Details", price: 212, image: shirt11 },
+        { id: 402, name: "Skinny Fit Jeans", price: 145, image: shirt12 },
+        { id: 403, name: "Checkered Shirt", price: 80, image: shirt13 },
+        { id: 404, name: "Sleeve Striped T-shirt", price: 210, image: shirt14 },
+      ];
 
-         <div data-aos="fade-right" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={shirt11} alt="T-shirt" className="h-full object-contain" />
+      return (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {products.map((product) => {
+            const item = cartItems.find((c) => c.id === product.id);
+
+            return (
+              <div key={product.id} className="group bg-white rounded-2xl p-4 shadow">
+                
+                <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4">
+                  <img src={product.image} className="h-full object-contain" />
+                </div>
+
+                <h3 className="font-semibold mb-2">
+                  {product.name}
+                </h3>
+
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="font-bold text-lg">${product.price}</span>
+                </div>
+
+                {!item ? (
+                  <button
+                    onClick={() => addToCart(product)}
+                    className="mt-3 text-xs bg-black text-white px-4 py-2 rounded-full"
+                  >
+                    Add to Cart
+                  </button>
+                ) : (
+                  <div className="mt-3 flex items-center bg-gray-100 rounded-full w-fit">
+                    <button onClick={() => decrease(product.id)} className="px-3">
+                      −
+                    </button>
+                    <span className="px-3">{item.qty}</span>
+                    <button onClick={() => increase(product.id)} className="px-3">
+                      +
+                    </button>
+                  </div>
+                )}
+
+              </div>
+            );
+          })}
         </div>
+      );
+    })()}
 
-        <h3 className="font-semibold mb-2">
-          T-shirt with Tape Details
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★★★</div>
-          <span className="text-gray-500">5.0/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$212</span>
-           <span className="line-through text-gray-400">$232</span>
-            <span className="text-red-500 text-xs bg-red-100 px-2 py-1 rounded-full">
-            -20%
-          </span>
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-
-      <div data-aos="fade-left" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={shirt12} alt="Jeans" className="h-full object-contain" />
-        </div>
-
-        <h3 className="font-semibold mb-2">
-          Skinny Fit Jeans
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★★☆</div>
-          <span className="text-gray-500">4/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$145</span>
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-
-      <div data-aos="fade-right" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={shirt13} alt="Checkered Shirt" className="h-full object-contain" />
-        </div>
-
-        <h3 className="font-semibold mb-2">
-          Checkered Shirt
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★☆☆</div>
-          <span className="text-gray-500">3/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$80</span>
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-
-      <div data-aos="fade-left" className="group">
-        <div className="bg-[#EDECEC] rounded-2xl p-6 flex items-center justify-center h-[250px] mb-4 transition group-hover:scale-105">
-          <img src={shirt14} alt="Striped T-shirt" className="h-full object-contain" />
-        </div>
-
-        <h3 className="font-semibold mb-2">
-          Sleeve Striped T-shirt
-        </h3>
-
-        <div className="flex items-center gap-2 mb-2 text-sm">
-          <div className="text-yellow-400">★★★★☆</div>
-          <span className="text-gray-500">4.5/5</span>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <span className="font-bold text-lg">$210</span>
-         
-        </div>
-
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
-      </div>
-
-    </div>
-
-    <div data-aos="fade-down" className="flex justify-center mt-12">
+    <div className="flex justify-center mt-12">
       <button className="border border-gray-300 px-8 py-3 rounded-full hover:bg-black hover:text-white transition">
         View All
       </button>
     </div>
+
   </div>
 </section>
+
 
      <section className="bg-[#F2F0F1] py-20">
   <div className="max-w-6xl mx-auto px-6">

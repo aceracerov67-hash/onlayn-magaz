@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useCart } from "../context/CartContext";
+
 
 import imgMain from "./images/product-main.png";
 import img1 from "./images/product-main.png";
@@ -15,6 +17,13 @@ const Product = () => {
   const [count, setCount] = useState(1);
   const [size, setSize] = useState("Large");
   const [color, setColor] = useState("olive");
+
+
+   const { addToCart, cartItems, increase, decrease } = useCart();
+
+
+
+
 
   return (
     
@@ -202,9 +211,42 @@ const Product = () => {
           </span>
         </div>
 
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
+       
+     {(() => {
+  const item = cartItems.find((c) => c.image === activeImg);
+
+  if (!item) {
+    return (
+      <button
+        onClick={() =>
+          addToCart({
+            id: 1,
+            name: "ONE LIFE GRAPHIC T-SHIRT",
+            price: 260,
+            image: activeImg,
+            size: size,
+            color: color,
+            qty: count,
+          })
+        }
+        className="flex-1 bg-black text-white rounded-full py-1 font-semibold"
+      >
+        🛒
+      </button>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-4 bg-gray-100 rounded-full px-26 py-2">
+      <button onClick={() => decrease(item.id)}>−</button>
+      <span>{item.qty}</span>
+      <button onClick={() => increase(item.id)}>+</button>
+    </div>
+  );
+})()}
+
+
+
       </div>
 
 
@@ -226,9 +268,42 @@ const Product = () => {
           <span className="font-bold text-lg">$145</span>
         </div>
 
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
+        
+       {(() => {
+  const item = cartItems.find((c) => c.image === activeImg);
+
+  if (!item) {
+    return (
+      <button
+        onClick={() =>
+          addToCart({
+            id: 1,
+            name: "ONE LIFE GRAPHIC T-SHIRT",
+            price: 260,
+            image: activeImg,
+            size: size,
+            color: color,
+            qty: count,
+          })
+        }
+        className="flex-1 bg-black text-white rounded-full py-1 font-semibold"
+      >
+        🛒
+      </button>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-4 bg-gray-100 rounded-full px-26 py-2">
+      <button onClick={() => decrease(item.id)}>−</button>
+      <span>{item.qty}</span>
+      <button onClick={() => increase(item.id)}>+</button>
+    </div>
+  );
+})()}
+
+
+
       </div>
 
 
@@ -250,9 +325,41 @@ const Product = () => {
           <span className="font-bold text-lg">$180</span>
         </div>
 
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
+        
+       {(() => {
+  const item = cartItems.find((c) => c.image === activeImg);
+
+  if (!item) {
+    return (
+      <button
+        onClick={() =>
+          addToCart({
+            id: 1,
+            name: "ONE LIFE GRAPHIC T-SHIRT",
+            price: 260,
+            image: activeImg,
+            size: size,
+            color: color,
+            qty: count,
+          })
+        }
+        className="flex-1 bg-black text-white rounded-full py-1 font-semibold"
+      >
+        🛒
+      </button>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-4 bg-gray-100 rounded-full px-26 py-2">
+      <button onClick={() => decrease(item.id)}>−</button>
+      <span>{item.qty}</span>
+      <button onClick={() => increase(item.id)}>+</button>
+    </div>
+  );
+})()}
+
+
       </div>
 
 
@@ -279,9 +386,39 @@ const Product = () => {
          
         </div>
 
-        <button className="mt-3 text-xs text-gray-500 hover:text-black transition">
-          🛒
-        </button>
+      {(() => {
+  const item = cartItems.find((c) => c.image === activeImg);
+
+  if (!item) {
+    return (
+      <button
+        onClick={() =>
+          addToCart({
+            id: 1,
+            name: "ONE LIFE GRAPHIC T-SHIRT",
+            price: 260,
+            image: activeImg,
+            size: size,
+            color: color,
+            qty: count,
+          })
+        }
+        className="flex-1 bg-black text-white rounded-full py-1 font-semibold"
+      >
+        🛒
+      </button>
+    );
+  }
+
+  return (
+    <div className="flex items-center gap-4 bg-gray-100 rounded-full px-26 py-2">
+      <button onClick={() => decrease(item.id)}>−</button>
+      <span>{item.qty}</span>
+      <button onClick={() => increase(item.id)}>+</button>
+    </div>
+  );
+})()}
+
       </div>
 
     </div>

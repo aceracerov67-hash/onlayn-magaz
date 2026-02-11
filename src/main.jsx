@@ -6,12 +6,16 @@ import "./index.css";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { CartProvider } from "./context/CartContext";
+
 
 // import { CartProvider } from "./context/CartContext";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
-      <App />
+      <CartProvider>
+  <App />
+</CartProvider>
   </BrowserRouter>
 );
  

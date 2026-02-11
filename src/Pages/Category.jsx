@@ -5,8 +5,13 @@ import jeans from "./images/product-main.png";
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useCart } from "../context/CartContext";
 
 const Category = () => {
+  
+  //  const { addToCart, cartItems } = useCart();
+  const { addToCart, cartItems, increase, decrease } = useCart();
+
   return (
     <section className="bg-[#F2F0F1] py-10">
       <div className="max-w-7xl mx-auto px-6">
@@ -80,50 +85,69 @@ const Category = () => {
 
             <div data-aos="fade-right" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-              {[shirt1, shirt2, shirt3, jeans, shirt1, shirt2].map((img, i) => (
-                <div key={i} className="group bg-white rounded-2xl p-4 shadow hover:shadow-lg transition">
-                  
-                  <div className="bg-[#F2F0F1] rounded-xl h-[220px] flex items-center justify-center mb-4">
-                    <img src={img} className="h-full object-contain group-hover:scale-105 transition" />
-                  </div>
+              {[shirt1, shirt2, shirt3, jeans, shirt1, shirt2].map((img, i) => {
+  const productId = i + 1;
+  const item = cartItems.find((c) => c.id === productId);
 
-                  <h3 className="font-semibold mb-2">
-                    Gradient Graphic T-shirt
-                  </h3>
+  return (
+    <div key={i} className="group bg-white rounded-2xl p-4 shadow hover:shadow-lg transition">
+      
+      <div className="bg-[#F2F0F1] rounded-xl h-[220px] flex items-center justify-center mb-4">
+        <img src={img} className="h-full object-contain group-hover:scale-105 transition" />
+      </div>
 
-                  <div className="text-yellow-400 text-sm mb-1">
-                    ★★★★☆
-                  </div>
+      <h3 className="font-semibold mb-2">
+        Gradient Graphic T-shirt
+      </h3>
 
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold">$145</span>
-                    <span className="line-through text-gray-400">$160</span>
-                  </div>
+      <div className="text-yellow-400 text-sm mb-1">
+        ★★★★☆
+      </div>
 
-                </div>
-              ))}
-               {[shirt1, shirt2, shirt3, jeans, shirt1, shirt2].map((img, i) => (
-                <div key={i} className="group bg-white rounded-2xl p-4 shadow hover:shadow-lg transition">
-                  
-                  <div className="bg-[#F2F0F1] rounded-xl h-[220px] flex items-center justify-center mb-4">
-                    <img src={img} className="h-full object-contain group-hover:scale-105 transition" />
-                  </div>
+      <div className="flex items-center gap-2 mb-3">
+        <span className="font-bold">$145</span>
+        <span className="line-through text-gray-400">$160</span>
+      </div>
 
-                  <h3 className="font-semibold mb-2">
-                    Gradient Graphic T-shirt
-                  </h3>
+      {!item ? (
+        <button
+          onClick={() =>
+            addToCart({
+              id: productId,
+              name: "Gradient Graphic T-shirt",
+              price: 145,
+              image: img,
+            })
+          }
+          className="p-2 bg-black text-white rounded-full"
+        >
+          🛒
+        </button>
+      ) : (
+        <div className="flex items-center bg-gray-100 rounded-full w-fit">
+          <button
+            onClick={() => decrease(productId)}
+            className="px-3 py-1 text-lg"
+          >
+            −
+          </button>
 
-                  <div className="text-yellow-400 text-sm mb-1">
-                    ★★★★☆
-                  </div>
+          <span className="px-3">{item.qty}</span>
 
-                  <div className="flex items-center gap-2">
-                    <span className="font-bold">$145</span>
-                    <span className="line-through text-gray-400">$160</span>
-                  </div>
+          <button
+            onClick={() => increase(productId)}
+            className="px-3 py-1 text-lg"
+          >
+            +
+          </button>
+        </div>
+      )}
 
-                </div>
-              ))}
+    </div>
+  );
+})}
+
+               
 
             </div>
 
